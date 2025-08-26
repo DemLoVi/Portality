@@ -1,0 +1,8 @@
+Model Information:
+* title:	Stylized Chest
+* source:	https://sketchfab.com/3d-models/stylized-chest-0451149371944d5fbd153f816dafed3a
+* author:	Rabbit (https://sketchfab.com/r4bbit4rabbit)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

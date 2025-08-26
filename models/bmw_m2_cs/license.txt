@@ -1,0 +1,8 @@
+Model Information:
+* title:	BMW M2 CS
+* source:	https://sketchfab.com/3d-models/bmw-m2-cs-d4d6bd0bfae445128dd01e095dd081d3
+* author:	RPMRender (https://sketchfab.com/RPMRender)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
