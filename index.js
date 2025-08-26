@@ -7,6 +7,9 @@ const monitorWidth = 0.52
 const monitorHeight = 0.294
 const monitorDepth = 0.4
 
+const halfW = monitorWidth / 2
+const halfH = monitorHeight / 2
+
 // Web
 const socket = new WebSocket("ws://127.0.0.1:8765")
 
@@ -27,8 +30,6 @@ const camera = new THREE.PerspectiveCamera()
 socket.addEventListener('message', (event) => {
     const data = JSON.parse(event.data)
     
-        const halfW = monitorWidth / 2
-        const halfH = monitorHeight / 2
 
     camera.position.set(
         -data.x + 0,
@@ -68,7 +69,7 @@ loader.load(
     (gltf) => {
         const model = gltf.scene
         model.scale.set(0.07, 0.07, 0.07)
-        model.position.set(-0.15, -0.147, -0.14)
+        model.position.set(-0.15, -halfH, -0.14)
         model.rotation.set(0, 0.4, 0)
         scene.add(model)
     },
@@ -84,7 +85,7 @@ loader.load(
     (gltf) => {
         const model = gltf.scene
         model.scale.set(0.04, 0.04, 0.04)
-        model.position.set(0.15, -0.13, -0.14)
+        model.position.set(0.15, (-halfH+0.017), -0.14)
         model.rotation.set(0, 4, 0)
         scene.add(model)
     },
@@ -102,7 +103,7 @@ const cube = new THREE.Mesh(
     new THREE.BoxGeometry(0.1, 0.1, 0.1),
     textureMaterial
 )
-cube.position.set(0, 0.05-0.147, -0.25)
+cube.position.set(0, 0.05-halfH, -0.25)
 scene.add(cube)
 
 
@@ -112,7 +113,7 @@ const floor = new THREE.Mesh(
     textureMaterial
 )
 floor.rotation.x = -Math.PI / 2
-floor.position.set(0, -0.147, -monitorDepth / 2)
+floor.position.set(0, -halfH, -monitorDepth / 2)
 scene.add(floor)
 
 // Back wall
@@ -120,7 +121,7 @@ const backWall = new THREE.Mesh(
     new THREE.PlaneGeometry(monitorWidth, monitorHeight),
     textureMaterial
 )
-backWall.position.set(0, monitorHeight/2-0.147, -monitorDepth)
+backWall.position.set(0, monitorHeight/2-halfH, -monitorDepth)
 scene.add(backWall)
 
 
