@@ -22,7 +22,7 @@ You’ll need **Python 3.10 or 3.11** (other versions may not support the `media
 
 First, calibrate your camera.
 
-In both `main.py` and `calibrate.py`, set the real distance between your eyes (in meters):
+In both `main.py` and `calibrate.py`, set the real distance between corners of your your eyes (in meters):
 
 ```python
 REAL_EYE_DIST = 0.115
