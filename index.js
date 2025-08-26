@@ -1,14 +1,14 @@
 import * as THREE from "three"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 
 
 // Data
-const monitorWidth = 0.52;   // шире монитора, чтобы края не видны
-const monitorHeight = 0.294; 
-const monitorDepth = 0.4;
+const monitorWidth = 0.52
+const monitorHeight = 0.294
+const monitorDepth = 0.4
 
 // Web
-const socket = new WebSocket("ws://127.0.0.1:8765");
+const socket = new WebSocket("ws://127.0.0.1:8765")
 
 // Scene + light
 const scene = new THREE.Scene()
@@ -25,31 +25,31 @@ const camera = new THREE.PerspectiveCamera()
 
 // Parser + camera set
 socket.addEventListener('message', (event) => {
-    const data = JSON.parse(event.data);
+    const data = JSON.parse(event.data)
     
-        const halfW = monitorWidth / 2;
-        const halfH = monitorHeight / 2;
+        const halfW = monitorWidth / 2
+        const halfH = monitorHeight / 2
 
     camera.position.set(
         -data.x + 0,
         -data.y + halfH,
         data.z + 0
-    );
+    )
   
-    const left   = (-halfW + data.x) / data.z;
-    const right  = ( halfW + data.x) / data.z;
-    const bottom = (-halfH - (data.y-halfH)) / -data.z;
-    const top    = ( halfH - (data.y-halfH)) / -data.z;
+    const left   = (-halfW + data.x) / data.z
+    const right  = ( halfW + data.x) / data.z
+    const bottom = (-halfH - (data.y-halfH)) / -data.z
+    const top    = ( halfH - (data.y-halfH)) / -data.z
 
-    const near = 0.01;
-    const far = 10;
+    const near = 0.01
+    const far = 10
 
     camera.projectionMatrix.makePerspective(
         left * near, right * near,
         bottom * near, top * near,
         near, far
-    );
-});
+    )
+})
 
 // Render
 const renderer = new THREE.WebGLRenderer()
@@ -106,22 +106,22 @@ cube.position.set(0, 0.05-0.147, -0.25)
 scene.add(cube)
 
 
-// Пол
+// Floor
 const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(monitorWidth, monitorDepth),
     textureMaterial
-);
-floor.rotation.x = -Math.PI / 2;  // горизонтально
-floor.position.set(0, -0.147, -monitorDepth / 2);
-scene.add(floor);
+)
+floor.rotation.x = -Math.PI / 2
+floor.position.set(0, -0.147, -monitorDepth / 2)
+scene.add(floor)
 
-// Задняя стена
+// Back wall
 const backWall = new THREE.Mesh(
     new THREE.PlaneGeometry(monitorWidth, monitorHeight),
     textureMaterial
-);
-backWall.position.set(0, monitorHeight/2-0.147, -monitorDepth);
-scene.add(backWall);
+)
+backWall.position.set(0, monitorHeight/2-0.147, -monitorDepth)
+scene.add(backWall)
 
 
 function animate(){
