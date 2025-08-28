@@ -71,4 +71,8 @@ python main.py
 
 After a few seconds the Python script will start working — just reload the page.
 
+## Usage
+
+You can change render mode between default and anaglyph by press Alt+1 and Alt+2, now this is a beta feature so it's may work unstable and not corectly
+
 🎉 Enjoy your “window to virtuality”!

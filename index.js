@@ -91,15 +91,24 @@ socket.addEventListener('message', (event) => {
 
 // ---------------- MODES ----------------
 let mode = 1 // "normal" | "anaglyph"
+document.addEventListener('keydown', (e) => {
+    console.log('Key pressed: ', e.key)
+    if (e.key === '1') {
+        mode = 0
+    } else if (e.key === '2') {
+        mode = 1
+    }
+    console.log('Mode: ', mode)
+})
 
 // ---------------- CUSTOM ANAGLYPH ----------------
-function makeFrustumShifted(baseMatrix, eyeOffset, near, focus = 1.0) {
+function makeFrustumShifted(eyeOffset, near, focus = 1.0) {
 
 
-    const leftBound = (-halfW + latestData.x) / latestData.z
-    const rightBound = (halfW + latestData.x) / latestData.z
-    const bottomBound = (-halfH - (latestData.y - halfH)) / -latestData.z
-    const topBound = (halfH - (latestData.y - halfH)) / -latestData.z
+    const leftBound =  (-halfW + latestData.x) / latestData.z
+    const rightBound =  (halfW + latestData.x) / latestData.z
+    const bottomBound =(-halfH - (latestData.y - halfH)) / -latestData.z
+    const topBound =    (halfH - (latestData.y - halfH)) / -latestData.z
     const far = 10
 
     const shift = eyeOffset * near / focus
@@ -128,13 +137,13 @@ function renderAnaglyph() {
 
     // lefe eye (red)
     camera.position.x = originalPosition.x - eyeStep / 2
-    camera.projectionMatrix = makeFrustumShifted(camera.projectionMatrix, -eyeStep / 2, near, focus)
+    camera.projectionMatrix = makeFrustumShifted(-eyeStep / 2, near, focus)
     gl.colorMask(true, false, false, true)
     renderer.render(scene, camera)
 
     // Right eye (blue)
     camera.position.x = originalPosition.x + eyeStep
-    camera.projectionMatrix = makeFrustumShifted(camera.projectionMatrix, +eyeStep, near, focus)
+    camera.projectionMatrix = makeFrustumShifted(+eyeStep, near, focus)
     gl.colorMask(false, true, true, true)
     renderer.render(scene, camera)
 
